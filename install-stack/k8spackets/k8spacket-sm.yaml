@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    app.kubernetes.io/name: k8spacket
+  name: k8spacket
+  namespace: monitoring
+spec:
+  endpoints:
+  - honorLabels: true
+    path: /metrics
+    port: http
+    scheme: http
+    scrapeTimeout: 30s
+  jobLabel: k8spacket
+  namespaceSelector:
+    matchNames:
+    - k8spacket
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: k8spacket
